@@ -1,30 +1,28 @@
 <?php include 'templates/header.php'?>
 
+<?php
+  $query = "SELECT * FROM contacts";
+  $result = mysqli_query($conn, $query);
+  $contacts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+
+<?php if(empty($contacts)):?>
+  <h2>No Records Found</h2>
+<?php endif ?>
+
+<?php foreach($contacts as $contact): ?>
+
   <div class="list-group">
     <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small>3 days ago</small>
+        <h5 class="mb-1"><?php echo $contact['email'] ?>g</h5>
+        <small><?php echo $contact['address_1'] ?></small>
       </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small>And some small print.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-body-secondary">3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small class="text-body-secondary">And some muted small print.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-body-secondary">3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small class="text-body-secondary">And some muted small print.</small>
+      <p class="mb-1"><?php echo $contact['address_2'] ?>.</p>
+      <small><?php echo $contact['city'] ?></small>
     </a>
   </div>
+
+<?php endforeach ?>
   
 <?php include 'templates/footer.php' ?>
